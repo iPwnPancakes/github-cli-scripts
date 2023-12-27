@@ -1,0 +1,3 @@
+{
+    "query": "{ issue(id: \"<ISSUE_ID>\") { id title } }"
+}
