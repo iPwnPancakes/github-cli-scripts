@@ -26,14 +26,14 @@ https://twitter.com/iPwnPancakes
 
 Creates a Pull Request on GitHub in the format `[ISSUE_ID] ISSUE_TITLE`. This was made because I found it extremely tedious to have to type out the Linear title twice; Once in Linear and once when creating the PR. 
 
-> **NOTE: This command expects the branch name to be the issue ID**
-
 ### Usage
 
 ```shell
 gh alias set 'prc' '!<repo>/linear/create_pr_from_issue.sh'
 ```
 
+> **NOTE: Must be in git repo with valid Linear issueID as branch name**
+
 ```shell
-gh prc # Must be in git repo with valid Linear issueID as branch name
+gh prc
 ```
