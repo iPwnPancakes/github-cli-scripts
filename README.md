@@ -57,27 +57,3 @@ gh alias set 'prc' '!~/.config/github-cli-scripts/linear/create_pr_from_issue.sh
 ```shell
 gh prc
 ```
-
-## `/github/create_monthly_release.sh`
-
-Creates a new tag for the current month, pushes it to `origin`, and creates a GitHub release with auto-generated notes.
-
-The script prompts for the tag and defaults to `vYYYY.MM` (for example, `v2026.02`). It exits before doing anything if the tag already exists on the remote.
-
-### Usage
-
-```shell
-gh alias set 'mrel' '!~/.config/github-cli-scripts/github/create_monthly_release.sh'
-```
-
-Run with prompt/default tag:
-
-```shell
-gh mrel
-```
-
-Or pass a tag directly:
-
-```shell
-gh mrel v2026.02
-```
