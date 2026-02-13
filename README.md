@@ -28,7 +28,7 @@ To use these scripts, we leverage the `gh alias` command like so:
 > Note: The `!` character is important and must be at the beginning of the second argument string.
 
 ```shell
-gh alias set 'ALIAS_NAME' '!~/<repo_path>/script'
+gh alias set 'ALIAS_NAME' '!~/.config/github-cli-scripts/script'
 ```
 
 Which will allow you to run the scripts by using the alias that you set, for example:
@@ -49,7 +49,7 @@ Creates a Pull Request on GitHub in the format `[ISSUE_ID] ISSUE_TITLE`. This wa
 ### Usage
 
 ```shell
-gh alias set 'prc' '!<repo>/linear/create_pr_from_issue.sh'
+gh alias set 'prc' '!~/.config/github-cli-scripts/linear/create_pr_from_issue.sh'
 ```
 
 > **NOTE: Must be in git repo with valid Linear issueID as branch name**
@@ -67,7 +67,7 @@ The script prompts for the tag and defaults to `vYYYY.MM` (for example, `v2026.0
 ### Usage
 
 ```shell
-gh alias set 'mrel' '!<repo>/create_monthly_release.sh'
+gh alias set 'mrel' '!~/.config/github-cli-scripts/github/create_monthly_release.sh'
 ```
 
 Run with prompt/default tag:
