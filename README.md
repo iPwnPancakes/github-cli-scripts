@@ -2,6 +2,26 @@
 
 This repository is meant to contain various github CLI scripts that I thought were useful.
 
+## Installation
+
+Install or update into `~/.config/github-cli-scripts` with:
+
+```shell
+bash <(curl -fsSL https://raw.githubusercontent.com/iPwnPancakes/github-cli-scripts/main/install.sh)
+```
+
+Or clone and run locally:
+
+```shell
+git clone git@github.com:iPwnPancakes/github-cli-scripts.git ~/.config/github-cli-scripts
+~/.config/github-cli-scripts/install.sh
+```
+
+The installer will:
+- clone into `~/.config/github-cli-scripts` if missing
+- run `git pull --ff-only` if already installed
+- copy `.env.example` to `.env` when `.env` does not exist
+
 ## General Notes on how to use scripts
 To use these scripts, we leverage the `gh alias` command like so:
 
@@ -24,7 +44,7 @@ https://twitter.com/iPwnPancakes
 
 ## `/linear/create_pr_from_issue.sh`
 
-Creates a Pull Request on GitHub in the format `[ISSUE_ID] ISSUE_TITLE`. This was made because I found it extremely tedious to have to type out the Linear title twice; Once in Linear and once when creating the PR. 
+Creates a Pull Request on GitHub in the format `[ISSUE_ID] ISSUE_TITLE`. This was made because I found it extremely tedious to have to type out the Linear title twice; Once in Linear and once when creating the PR.
 
 ### Usage
 
@@ -36,4 +56,28 @@ gh alias set 'prc' '!<repo>/linear/create_pr_from_issue.sh'
 
 ```shell
 gh prc
+```
+
+## `/github/create_monthly_release.sh`
+
+Creates a new tag for the current month, pushes it to `origin`, and creates a GitHub release with auto-generated notes.
+
+The script prompts for the tag and defaults to `vYYYY.MM` (for example, `v2026.02`). It exits before doing anything if the tag already exists on the remote.
+
+### Usage
+
+```shell
+gh alias set 'mrel' '!<repo>/create_monthly_release.sh'
+```
+
+Run with prompt/default tag:
+
+```shell
+gh mrel
+```
+
+Or pass a tag directly:
+
+```shell
+gh mrel v2026.02
 ```
