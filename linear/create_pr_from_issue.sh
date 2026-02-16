@@ -9,13 +9,33 @@ if [ -z "$branch_name" ]; then
     exit 1
 fi
 
-base_branch="master"
-if ! git show-ref --verify --quiet "refs/heads/$base_branch"; then
-    base_branch=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null | sed 's|^origin/||')
-fi
+resolve_base_branch() {
+    local default_branch
 
-if [ -z "$base_branch" ]; then
-    base_branch="master"
+    default_branch=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null | sed 's|^origin/||')
+    if [ -n "$default_branch" ]; then
+        echo "$default_branch"
+        return 0
+    fi
+
+    for candidate in main master; do
+        if git show-ref --verify --quiet "refs/heads/$candidate"; then
+            echo "$candidate"
+            return 0
+        fi
+
+        if git show-ref --verify --quiet "refs/remotes/origin/$candidate"; then
+            echo "$candidate"
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+if ! base_branch=$(resolve_base_branch); then
+    echo "Could not determine base branch. Expected default branch to be main or master."
+    exit 1
 fi
 
 issue_title=$($SCRIPT_DIR/retrieve_issue.sh $branch_name)
